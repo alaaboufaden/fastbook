@@ -1,14 +1,25 @@
 
 - name: Install java 8 preresequesits
   apt: name=python-software-properties
+  when:  ansible_os_family == "Debian"
 
 - name: Add Java 8 repository
   apt_repository: repo='ppa:webupd8team/java'
+  when:  ansible_os_family == "Debian"
 
 - name: Agree to oracle license
   debconf: name=oracle-java8-installer question=shared/accepted-oracle-license-v1-1 vtype=select value=true
+  when:  ansible_os_family == "Debian"
 
 - name: Install Java 8
-  apt: name=oracle-java8-installer force=yes
+  apt: name=oracle-java8-installer 
+  when:  ansible_os_family == "Debian"
 
+- name: Install OpenJDK 8 JRE
+  yum: name=java-1.8.0-openjdk force=yes
+  when:  ansible_os_family == "Redhat"
+
+- name: Install OpenJDK 8 JDK
+  yum: name=java-1.8.0-openjdk-devel force=yes
+  when:  ansible_os_family == "Redhat"
 
