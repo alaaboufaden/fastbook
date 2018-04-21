@@ -1,0 +1,20 @@
+- name: Install Docker appropriate to Distribution (RedHat/CentOs)
+  yum: pkg=docker state=latest  
+  when:  ansible_os_family == "Redhat"
+
+
+- name: Install Docker appropriate to Distribution (Ubuntu/Debian)
+  apt: pkg=docker state=latest
+  when:  ansible_os_family == "Debian"
+
+
+- name: Install Docker appropriate to Distribution (RedHat/CentOs)
+  yum: pkg=docker-compose state=latest
+  notify: Restart Docker service
+  when:  ansible_os_family == "Redhat"
+
+
+- name: Install Docker appropriate to Distribution (Ubuntu/Debian)
+  apt: pkg=docker state=latest
+  when:  ansible_os_family == "Debian"
+

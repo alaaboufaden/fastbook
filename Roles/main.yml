@@ -1,0 +1,12 @@
+--- # Install git, Docker and jenkins
+- hosts: all 
+  user: alaa
+  sudo: yes
+  connection: ssh
+  gather_facts: yes     
+  roles:
+          - Docker
+          - Git
+          - Jenkins
+          - Java
+

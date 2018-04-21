@@ -1,0 +1,19 @@
+- name: Download Jenkins package appropriate to Distribution (RedHat/CentOs)
+  command: wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo && rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key 
+  when:  ansible_os_family == "Redhat"
+
+- name: Install Jenkins appropriate to Distribution (RedHat/CentOs)
+  yum: pkg=jenkins state=latest  
+  when:  ansible_os_family == "Redhat"
+  notify: Restart Jenkins service
+
+- name: Download Jenkins package appropriate to Distribution (Ubuntu/Debian)
+  command: wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | apt-key add - && deb https://pkg.jenkins.io/debian-stable binary/ && apt-get update
+  when:  ansible_os_family == "Debian"
+
+- name: Install Jenkins appropriate to Distribution (Ubuntu/Debian)
+  apt: pkg=jenkins state=latest
+  when:  ansible_os_family == "Debian"
+
+
+

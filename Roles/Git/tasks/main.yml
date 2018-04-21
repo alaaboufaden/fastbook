@@ -1,0 +1,11 @@
+- name: Install git appropriate to Distribution (RedHat/CentOs)
+  yum: pkg=git state=latest  
+  when:  ansible_os_family == "Redhat"
+  notify: Restart Git service
+
+
+- name: Install git appropriate to Distribution (Ubuntu/Debian)
+  apt: pkg=git state=latest
+  when:  ansible_os_family == "Debian"
+
+

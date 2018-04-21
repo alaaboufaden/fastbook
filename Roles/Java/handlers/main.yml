@@ -1,0 +1,2 @@
+- name: Restart Java service 
+  service: name=java state=restarted
